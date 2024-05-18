@@ -2,28 +2,53 @@
 #include <string.h>
 #include <ctype.h>
 
+const int M = 25;
+int scoreup(char x[M]);
+
 int main(void)
 {
-const int M = 25;
+  char a[M];
+  char b[M];
+ 
+  printf("Player 1: ");
+  scanf("%s", &a);
 
-char a[M];
-char b[M];
+  printf("Player 2: ");
+  scanf("%s", &b);
+  
+  int scorea = scoreup(a);
+  int scoreb = scoreup(b);
 
-printf("Player 1: ");
-scanf("%s", &a);
+  printf("%i %i\n", scorea, scoreb);
 
-for (int i = 0, n = strlen(a); i < n; i++)
+  if (scorea > scoreb)
   {
-  toupper(a[i]);
+    printf("Player 1 wins\n");
   }
-
-printf("Player 2: ");
-scanf("%s", &b);
-
-for (int i = 0, n = strlen(b); i < n; i++)
+  else if (scorea < scoreb)
   {
-  toupper(b[i]);
+    printf("Player 2 wins\n");
   }
-
-// printf("%s %s\n", a, b);
+  else
+  {
+    printf("Looks like a tie my man\n");
+  }
 }
+
+  int scoreup(char x[M])
+  {
+    int score = 0;
+
+    for (int i = 0, n = strlen(x); i < n; i++)
+    {
+      if (x[i] == 'A')
+      {
+        score += 1;
+      }
+      else if (x[i] == 'B')
+      {
+        score += 3;
+      }
+    }
+    return score;
+  }

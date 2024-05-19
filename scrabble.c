@@ -41,6 +41,8 @@ int main(void)
 
     for (int i = 0, n = strlen(x); i < n; i++)
     {
+      x[i] = toupper(x[i]);
+
       if (x[i] == 'A')
       {
         score += 1;

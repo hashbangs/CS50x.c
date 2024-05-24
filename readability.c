@@ -7,7 +7,7 @@
 * compute them using the index 
 * output the grade level as an int value */
 
-#define M 256
+#define M 512
 
 int lc(char x[M]);
 int wc(char x[M]);
@@ -23,13 +23,19 @@ int main(int argc, char* argv[])
   }
   printf("Text: ");
   fgets(text, M, stdin);
-  printf("%s", text);
 
   int letters = lc(text);
   int words = wc(text);
   int sentences = sc(text);
 
-  printf("%i %i %i\n", letters, words, sentences);
+  // calculating the index
+  float L = ((float)letters / (float)words) * 100;
+  float S = ((float)sentences / (float)words) * 100;
+
+  float index = 0.0588 * L - 0.296 * S - 15.8;
+
+  printf("\t%i\t%i\t%i\n", letters, words, sentences);
+  printf("grade level: %f\n",index);
 }
 
 // letter count

@@ -9,6 +9,10 @@
 
 #define M 256
 
+int lc(char x[M]);
+int wc(char x[M]);
+int sc(char x[M]);
+
 int main(int argc, char* argv[])
 {
   char *text = malloc(M);
@@ -21,26 +25,56 @@ int main(int argc, char* argv[])
   fgets(text, M, stdin);
   printf("%s", text);
 
-  int letters, words, sentences = 0;
-
-  for (int i = 0, n = strlen(text); i < n; i++)
-  {
-    if (text[i] >= 'a' && text[i] <= 'z' || text[i] >= 'A' && text[i] <= 'Z')
-    {
-      letters += 1;
-    }
-    else if (text[i] == ' ')
-    {
-      words += 1;
-    }
-    else if (text[i] == '.' || text[i] == '?' || text[i] == '!')
-    {
-      sentences += 1;
-    }
-  }
-  // n° of words = n° of whitespaces + 1
-  words += 1;
+  int letters = lc(text);
+  int words = wc(text);
+  int sentences = sc(text);
 
   printf("%i %i %i\n", letters, words, sentences);
 }
 
+// letter count
+int lc(char x[M])
+{
+  int l = 0;
+
+  for (int i = 0, n = strlen(x); i < n; i++)
+  {
+    if (x[i] >= 'a' && x[i] <= 'z' || x[i] >= 'A' && x[i] <= 'Z')
+    {
+      l += 1;
+    }
+  }
+  return l;
+}
+
+// word count
+int wc(char x[M])
+{
+  int w = 0;
+  
+  for (int i = 0, n = strlen(x); i < n; i++)
+  {
+    if (x[i] == ' ')
+    {
+      w += 1;
+    }
+  }
+  // n° of words = n° of whitespaces + 1
+  w += 1;
+  return w;
+}
+
+// sentence count
+int sc(char x[M])
+{
+  int s = 0;
+
+  for (int i = 0, n = strlen(x); i < n; i++)
+  {
+    if (x[i] == '.' || x[i] == '?' || x[i] == '!')
+    {
+    s += 1;
+    }
+  }
+  return s;
+}

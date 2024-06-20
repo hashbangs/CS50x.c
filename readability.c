@@ -17,7 +17,7 @@ int sc(char x[M]);
 int main(int argc, char* argv[])
 {
   char *text = malloc(M);
-  if (text == "NULL")
+  if (text == NULL)
   {
     printf("no memory\n");
     return 1;

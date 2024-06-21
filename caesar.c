@@ -14,4 +14,9 @@ int main(int argc, char* argv[])
     printf("Usage: ./caesar key\n");
     return 1;
   }
+  char *plain = malloc(M);
+  printf("plaintext: ");
+  fgets(plain, M, stdin);
+
+  printf("%s\n", plain);
 }

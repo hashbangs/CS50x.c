@@ -1,4 +1,4 @@
-PROG = readability
+PROG = caesar
 
 CC = gcc
 LIBS = lm

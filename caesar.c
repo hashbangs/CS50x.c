@@ -8,7 +8,7 @@
 
 #define M 512
 
-char* tocypher(char x[M]);
+char* tocypher(char x[M], int k);
 
 int main(int argc, char* argv[])
 {
@@ -17,19 +17,27 @@ int main(int argc, char* argv[])
     printf("Usage: ./caesar key\n");
     return 1;
   }
+  else if (argv[2] != NULL)
+  {
+    printf("too many arguments provided\n");
+    return 2;
+  }
+
+  long key = strtol(argv[1], NULL, 10);
+
   char *plain = malloc(M);
   printf("plaintext: ");
   fgets(plain, M, stdin);
 
-  char* cypher = tocypher(plain);
-  printf("%s\n", cypher);
+  char* cypher = tocypher(plain, key);
+  printf("cyphertext: %s\n", cypher);
 }
 
-char* tocypher(char x[M])
+char* tocypher(char x[M], int k)
 {
   for (int i = 0, n = strlen(x); i < n; i++)
     {
-      x[i] += 1;
+      x[i] += k;
     }
   return x;
 }

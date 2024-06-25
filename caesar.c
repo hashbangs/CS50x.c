@@ -37,7 +37,7 @@ char* tocypher(char x[M], int k)
 {
   for (int i = 0, n = strlen(x); i < n; i++)
     {
-      if (x[i] != 32) // ASCII value for space
+      if (x[i] >= 'a' && x[i] <= 'z' || x[i] >= 'A' && x[i] <= 'Z')
        {
         x[i] += k;
        }

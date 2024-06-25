@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -8,7 +9,7 @@
 
 #define M 512
 
-char* tocypher(char x[M], int k);
+char* rotate(char x[M], int k);
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +23,17 @@ int main(int argc, char* argv[])
     printf("too many arguments provided\n");
     return 2;
   }
+  else
+  {
+    for (int i = 0, n = strlen(argv[1]); i < n; i++)
+    {
+      if (!isdigit(argv[1][i]))
+      {
+        printf("key entered is non-numerical\n");
+        return 3;
+      }
+    }
+  }
 
   long key = strtol(argv[1], NULL, 10);
 
@@ -29,18 +41,25 @@ int main(int argc, char* argv[])
   printf("plaintext: ");
   fgets(plain, M, stdin);
 
-  char* cypher = tocypher(plain, key);
+  char* cypher = rotate(plain, key);
   printf("cyphertext: %s\n", cypher);
 }
 
-char* tocypher(char x[M], int k)
+char* rotate(char x[M], int k)
 {
   for (int i = 0, n = strlen(x); i < n; i++)
+  {
+    if (isalpha(x[i]))
     {
-      if (x[i] >= 'a' && x[i] <= 'z' || x[i] >= 'A' && x[i] <= 'Z')
-       {
-        x[i] += k;
-       }
+      if (isupper(x[i]))
+      {
+        x[i] = ((x[i] - 65 + k) % 26) + 65;
+      }
+      else
+      {
+        x[i] = ((x[i] - 97 + k) % 26) + 97;
+      }
     }
+  }
   return x;
 }

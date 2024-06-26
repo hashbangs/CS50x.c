@@ -4,8 +4,9 @@ int main()
 {
   int numbers[] = {20, 500, 10, 5, 100, 1, 50};
 
+  int n;
   printf("Number: ");
-  int n = scanf("%d", &n);
+  scanf("%d", &n);
 
   for (int i = 0; i < 7; i++)
   {
